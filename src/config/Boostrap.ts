@@ -19,6 +19,14 @@ export class Boostrap {
         this.app.use(morgan('tiny'))
     }
 
+    public Inject(routes: any[]) {
+        routes.forEach(route => {
+            this.app.use(route.app);
+            console.log(route.app)
+
+        })
+        // this.app.use(routes);
+    }
 
     public Start() {
         this.app.listen(this.port, () => {
