@@ -22,8 +22,7 @@ export class Boostrap {
     public Inject(routes: any[]) {
         routes.forEach(route => {
             this.app.use(route.app);
-            console.log(route.app)
-
+            console.log(route.app);
         })
         // this.app.use(routes);
     }
