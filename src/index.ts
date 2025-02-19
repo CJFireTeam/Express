@@ -1,27 +1,25 @@
-import express, { Request, Response, NextFunction } from "express";
-import dotenv from "dotenv";
+// import express, { Request, Response, NextFunction,Application } from "express";
+// import dotenv from "dotenv";
 
-// Cargar variables de entorno (si usas un archivo .env)
-dotenv.config();
+import { Boostrap } from "./config/Boostrap";
 
-const app = express();
-const port = process.env.PORT || 3000;
+// app.get("/", (req: Request, res: Response) => {
+//   res.send({ message: "¡Hola mundo con Node.js, Express y TypeScript!" });
+// });
 
-// Middleware para parsear JSON
-app.use(express.json());
+// // Middleware para manejo de errores
+// app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+//   console.error(err);
+//   res.status(500).send({ error: "Algo salió mal" });
+// });
 
-// Ruta principal
-app.get("/", (req: Request, res: Response) => {
-  res.send({ message: "¡Hola mundo con Node.js, Express y TypeScript!" });
-});
+// // Levantar el servidor
 
-// Middleware para manejo de errores
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error(err);
-  res.status(500).send({ error: "Algo salió mal" });
-});
 
-// Levantar el servidor
-app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`);
-});
+
+
+function Power() {
+  new Boostrap().Start();
+}
+
+Power();
