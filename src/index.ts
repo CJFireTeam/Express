@@ -1,14 +1,7 @@
 import { Boostrap } from "./config/Boostrap";
-import { AuthRoutes } from "./config/routes/AuthRoutes";
-import { HelloWorldRoutes } from "./config/routes/HelloWorld.route";
-import { UserRoutes } from "./config/routes/UserRoutes";
-
-// app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-//   console.error(err);
-//   res.status(500).send({ error: "Algo salió mal" });
-// });
-
-
+import { AuthRoutes } from "./infraestructure/routes/Auth.route";
+import { HelloWorldRoutes } from "./infraestructure/routes/HelloWorld.route";
+import { UserRoutes } from "./infraestructure/routes/User.route";
 
 function Power() {
   const boostrap = new Boostrap();
