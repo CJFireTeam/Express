@@ -9,12 +9,8 @@ export class AuthRoutes {
   private controller: AuthController = new AuthController();
 
   constructor() {
-    // // Ruta para el registro de usuarios
-    // this.app.post(`${this.route}/register`, this.register);
-    // Ruta para el inicio de sesión
-    /* this.app.post(`${this.route}/login`, this.controller.login); */
+
     this.app.post(`${this.route}/login`,validateDto(LoginDto),this.controller.login);
-    // // Ruta protegida para obtener perfil (requiere autenticación)
-    // this.app.get(`${this.route}/profile`, this.authenticate, this.profile);
+    this.app.get(`${this.route}/me`, this.profile);
   }
 }

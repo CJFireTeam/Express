@@ -19,7 +19,7 @@ export default class extends baseController {
     public login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { email, password } = req.body as LoginDto;
-            const result = await this.service.auth.signUp({ email, password });
+            const result = await this.service.auth.signInWithPassword({ email, password });
             res.status(200).json(result);
         } catch (error) {
             next(error);
