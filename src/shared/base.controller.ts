@@ -5,8 +5,8 @@ import { supabaseObject } from "../services/supabase";
 export default class {
 
     protected service:SupabaseClient<any, "public", any>;
-
     constructor() {
         this.service = supabaseObject;
+
     }
 }

@@ -1,6 +1,6 @@
 export default class Date {
     public value: globalThis.Date;
-    constructor(value: string | globalThis.Date) {
+    constructor(value?: string | globalThis.Date) {
       if (!value) {
         throw new Error('date is required');
       }

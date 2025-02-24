@@ -19,7 +19,7 @@ import { CustomRequest } from "../../shared/guards/jwt.guard";
     export default class extends baseController {
         public login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
             try {
-                const { email, password } = req.body as LoginDto;
+                const { email, password } = req.body;
                 
                 const { data, error } = await this.service.auth.signInWithPassword({
                     email,

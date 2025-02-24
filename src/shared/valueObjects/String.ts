@@ -1,12 +1,15 @@
 export default class String {
     public value: string
-    constructor(value:string) {
+    constructor(value:string = '',required:boolean = false,length?:number){
         this.value = value;
-        if (!value) {
-            throw new Error('string is required')
+
+        if (required && value.length === 0){
+            throw ('string is required')
         }
-        if (value.length <5){
-            throw new Error('Valor menor a 5 caracteres.')
+
+        
+        if (length && value.length < length){
+            throw (`Valor menor a ${length} caracteres.`)
         }
     }
 }
