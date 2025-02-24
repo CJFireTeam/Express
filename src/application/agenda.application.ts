@@ -4,7 +4,7 @@ import example from '../domain/agenda/example.json';
 export default class AgendaApplication {
 
   private _service: SupabaseClient<any, "public", any>;
-  
+
   constructor(service: SupabaseClient<any, "public", any>) {
     this._service = service;
   }
@@ -12,8 +12,14 @@ export default class AgendaApplication {
   public getOne(user: number) {
 
     // llamado de servicio
-      
+
     // 
     return new Agenda(example).json();
+  }
+
+  public create(agendaData: any) {
+
+    
+    return new Agenda(agendaData).json();
   }
 }

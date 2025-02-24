@@ -34,21 +34,25 @@ import AgendaApplication from "../../application/agenda.application";
 
         }
 
-        public postAgenda = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+        public createAgenda = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
             try {
-                const data = req.body; 
-                return res.status(200).json({
-                    status: 'success',
-                    message: 'Datos recibidos exitosamente',
-                    data: data
-                });
+              const agendaData = req.body;
+              const result = this.application.create(agendaData);
+              
+              return res.status(201).json({
+                status: 'success',
+                message: 'Creación de agenda exitosa',
+                data: result
+              });
+                  
             } catch (error) {
-                return res.status(500).json({
-                    status: 'error',
-                    message: 'Error al procesar los datos',
-                    error: error
-                });
+              return res.status(500).json({
+                status: 'error',
+                message: 'Creación de agenda fallida',
+                error: error
+              });
+                  
             }
-        }
+          }
     
     }
