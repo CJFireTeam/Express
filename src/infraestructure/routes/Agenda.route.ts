@@ -12,6 +12,6 @@ export class AgendaRoutes {
 
   constructor() {
     this.app.get(`${this.route}`,this.controller.getAgenda);
-    
+    this.app.post(`${this.route}`, this.controller.postAgenda);
   }
 }
