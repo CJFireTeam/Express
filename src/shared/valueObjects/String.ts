@@ -3,9 +3,9 @@ export default class String {
     constructor(value:string = '',required:boolean = false,length?:number){
         this.value = value;
 
-        if (required && value.length === 0){
+       /*  if (required && value.length === 0){
             throw ('string is required')
-        }
+        } */
 
         
         if (length && value.length < length){

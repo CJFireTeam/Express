@@ -11,18 +11,11 @@ export class CreateAgendaDto {
 
   @IsString()
   @IsOptional()
-  owner?: string;
-
-  @IsString()
-  @IsOptional()
   location?: string;
 
-  // Cuando descomentes las fechas en tu modelo:
-  // @IsString()
-  // @IsOptional()
-  // startDate?: string;
+  @IsString()
+  startDate!: string;
 
-  // @IsString()
-  // @IsOptional()
-  // endDate?: string;
+  @IsString()
+  endDate!: string;
 }
