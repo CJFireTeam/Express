@@ -23,13 +23,11 @@ export default class AgendaApplication {
       if (userError) throw userError;
       if (!user) throw new Error("Usuario no autenticado");
 
-      // Validación de fechas
-      if (!agendaData.startDate) throw new Error("startDate es requerido");
-      const startDate = new Date(agendaData.startDate);
-      if (isNaN(startDate.getTime())) throw new Error("Fecha inválida");
+      // Crear una instancia de Agenda (las validaciones de fechas se manejan en el constructor de Agenda)
+      const agenda = new Agenda(agendaData);
 
       // Calcular semana
-      const { weekStart, weekEnd } = this.getWeekRange(startDate);
+      const { weekStart, weekEnd } = this.getWeekRange(agenda.startDate.value);
 
       // Verificar agendas existentes
       const { data, error: queryError } = await supabase
