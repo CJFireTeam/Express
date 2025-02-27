@@ -3,10 +3,8 @@ import Agenda from "../domain/agenda/agenda";
 import example from '../domain/agenda/example.json';
 export default class AgendaApplication {
 
-  private _service: SupabaseClient<any, "public", any>;
 
-  constructor(service: SupabaseClient<any, "public", any>) {
-    this._service = service;
+  constructor() {
   }
 
   public getOne(user: number) {
@@ -17,9 +15,17 @@ export default class AgendaApplication {
     return new Agenda(example).json();
   }
 
-  public create(agendaData: any) {
-
-    
-    return new Agenda(agendaData).json();
+  public async  create(agendaData: any,supabase:SupabaseClient<any, "public", any>) {
+    try {
+      const id =  await supabase.auth.getUser();
+      const agendaWithOwner = {...agendaData,owner:(await supabase.auth.getUser()).data.user?.id};
+      const agenda =  new Agenda(agendaWithOwner).json();
+      console.log(agenda)
+      const {error} = await supabase.from('agenda').insert(agenda);
+      if (error) throw error
+      return agenda;
+    } catch (error) {
+      throw error
+    }
   }
 }

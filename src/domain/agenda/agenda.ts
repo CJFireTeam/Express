@@ -46,8 +46,8 @@ export default class Agenda {
   public get location(): String {
     return this._location;
   }
-  public get owner(): String {
-    return this._owner;
+  public get owner(): string {
+    return this._owner.value;
   }
   
 
@@ -71,9 +71,9 @@ export default class Agenda {
   public set setLocation(value: string) {
     this._location = new String(value);
   }
-  public set setOwner(value: string) {
-    this._owner = new String(value);
-  }
+  // public set setOwner(value: string) {
+  //   this._owner = new String(value);
+  // }
   public json() {
     return {
       title: this.title.value,
@@ -81,6 +81,7 @@ export default class Agenda {
       // startDate: this.startDate.value,
       // endDate: this.endDate.value,
       location: this.location.value,
+      user_id: this.owner
     };
   }
 }

@@ -8,12 +8,11 @@ import { CustomRequest } from "../../shared/guards/jwt.guard";
 import AgendaApplication from "../../application/agenda.application";
 
 
-    export default class extends baseController {
+    export default class  {
         private application: AgendaApplication;
         
         constructor() {
-            super();
-            this.application = new AgendaApplication(this.service);
+            this.application = new AgendaApplication();
         }
         public getAgenda = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
             try {
@@ -34,10 +33,10 @@ import AgendaApplication from "../../application/agenda.application";
 
         }
 
-        public createAgenda = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+        public createAgenda = async (req: CustomRequest, res: Response, next: NextFunction): Promise<any> => {
             try {
               const agendaData = req.body;
-              const result = this.application.create(agendaData);
+              const result = await this.application.create(agendaData,req.supabase as SupabaseClient<any, "public", any>);
               
               return res.status(201).json({
                 status: 'success',

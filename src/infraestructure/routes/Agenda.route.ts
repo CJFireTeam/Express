@@ -13,6 +13,6 @@ export class AgendaRoutes {
 
   constructor() {
     this.app.get(`${this.route}`,this.controller.getAgenda);
-    this.app.post(`${this.route}`, validateDto(CreateAgendaDto), this.controller.createAgenda);
+    this.app.post(`${this.route}`, [verifyToken,validateDto(CreateAgendaDto)], this.controller.createAgenda);
   }
 }

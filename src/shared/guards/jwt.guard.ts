@@ -1,9 +1,11 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { supabaseObject } from "../../services/supabase";
 import { Request, Response, NextFunction } from "express";
+import { SupabaseClient } from "@supabase/supabase-js";
 
 export interface CustomRequest extends Request {
   user?: any; // Cambiamos el tipo para manejar la respuesta de Supabase
+  supabase?: SupabaseClient<any, "public", any>;
 }
 
 export const verifyToken = async (
@@ -25,20 +27,20 @@ export const verifyToken = async (
       res.status(401).json({ message: "Token no válido" });
       return;
     }
+    const supabase = supabaseObject;
 
-    const {
-      data: { user },
-      error,
-    } = await supabaseObject.auth.getUser(token);
+    const { data: userData, error: userError } = await supabase.auth.getUser(token);
 
-    if (error) {
-      res
-        .status(403)
-        .json({ message: "Token inválido o expirado", error: error.message });
+    if (userError || !userData?.user) {
+      res.status(403).json({
+        message: "Token inválido o expirado",
+        error: userError?.message,
+      });
       return;
     }
-
-    req.user = user;
+  supabase.auth.setSession({access_token: token, refresh_token:token});    
+    req.supabase = supabase;
+    req.user = userData.user;
     next();
   } catch (error) {
     res.status(403).json({ message: "Error al verificar el token", error });
